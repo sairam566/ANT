@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="MyProject" default="print">
+	<target name="print">
+		<echo>My First Ant Program</echo>
+	</target>
+</project>
