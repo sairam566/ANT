@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="EnvVariables" basedir="." default="print">
+	<property environment="env" />
+	<target name="print">
+		<echo>Logged-In User : ${env.USERNAME}</echo>
+		<echo>Java Home Location : ${env.JAVA_HOME}</echo>
+		<echo>Operating System : ${env.OS}</echo>
+		<echo>System Path : ${env.PATH}</echo>
+	</target>
+</project>
