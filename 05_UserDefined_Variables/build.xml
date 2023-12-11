@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="UserDefVar" basedir="." default="print">
+	<property name="script.author" value="sairam566"/>
+	<property name="tomcat.server.version" value="9.0"/>
+	<target name="print">
+		<echo>Author of this Script : ${script.author}</echo>
+		<echo>Min Tomcat Version Required : ${tomcat.server.version}</echo>
+	</target>
+</project>
