@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="02_ANT_Variables" basedir="." default="print">
+	<target name="print">
+		<echo>Current Ant Version : ${ant.version}</echo>
+		<echo>Current Java Version Ant Using : ${ant.java.version}</echo>
+		<echo>Current Project Name ${ant.project.name}</echo>
+		<echo>Current Ant Build Target : ${ant.project.default-target}</echo>
+		<echo>Current Ant Binary Distribution Location : ${ant.home}</echo>
+		<echo>Current Ant Binary Distribution Library Location : ${ant.library.dir}</echo>
+		<echo>Current Build.xml Location : ${ant.file}</echo>
+		<echo>Current BaseDir Location : ${basedir}</echo>
+	</target>
+</project>
