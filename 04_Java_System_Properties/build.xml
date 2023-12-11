@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="JavaSystemProp" basedir="." default="print">
+	<target name="print">
+		<echo>Java Vendor : ${java.vendor.url}</echo>
+		<echo>Operating System Name : ${os.name}</echo>
+		<echo>Java Vendor : ${java.specification.vendor}</echo>
+	</target>
+</project>
