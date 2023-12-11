@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="externalProp" basedir="." default="print">
+	<property file="build-dev.properties"/>
+	<target name="print">
+		<echo>Author Name : ${author.name}</echo>
+		<echo>Build Version : ${build.version}</echo>
+	</target>
+</project>
