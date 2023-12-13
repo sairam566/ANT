@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="fileSetTest" basedir="." default="init">
+	
+	<target name="init" depends="clean,create,copy"></target>
+	
+	<target name="clean">
+		<delete dir="finalFolder" />
+	</target>
+	<target name="create">
+		<mkdir dir="finalFolder" />
+	</target>
+	<target name="copy">
+		<copy todir="finalFolder">
+			<fileset dir="files">
+				<include name="**/*.txt"/>
+			</fileset>
+		</copy>
+	</target>
+</project>
