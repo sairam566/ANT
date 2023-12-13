@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="stateLookUp" basedir="." default="init">
+	<property file="build.properties" />
+
+	<condition property="jdk11">
+		<equals arg1="${required.jdk}" arg2="${ant.java.version}" />
+	</condition>
+
+	<target name="checkJDKVersion" unless="jdk11">
+		<fail message="Abort Java ${required.jdk} is required for this build" />
+	</target>
+
+	<target name="init" depends="checkJDKVersion,clean,create,compile,package" />
+
+	<target name="clean">
+		<delete dir="${classes.dir}" />
+		<delete dir="${dist.dir}" />
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="create">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${classes.dir}" />
+		<mkdir dir="${dist.dir}" />
+	</target>
+
+	<target name="compile">
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" />
+		<copy file="${src.dir}${file.separator}states-and-capitals.properties" todir="${classes.dir}" />
+	</target>
+
+	<target name="package">
+		<jar destfile="${dist.dir}${file.separator}${ant.project.name}-${build.number}.jar" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="com.tsr.lookup.CapitalLookUp" />
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="execute">
+		<java fork="true" jar="${dist.dir}${file.separator}${ant.project.name}-${build.number}.jar" args="Telangana"/>
+	</target>
+</project>
