@@ -31,9 +31,7 @@
 
 	<target name="copy">
 		<copy todir="finalList">
-			<filelist refid="reqFiles">
-
-			</filelist>
+			<filelist refid="reqFiles"/>
 		</copy>
 	</target>
 </project>
