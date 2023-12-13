@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="testFileList" basedir="." default="init">
+	<target name="init" depends="clean,make,copy" />
+
+	<!-- This will delete entire folder and it's contents
+	<target name="clean">
+		<delete dir="finalList/pdf" />
+		<delete dir="finalList" />
+	</target> 
+	-->
+
+	<!-- Will remove folder contents only not the folder-->
+	<target name="clean">
+		<delete>
+			<fileset dir="finalList">
+				<include name="**/*" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="make">
+		<mkdir dir="finalList" />
+		<mkdir dir="finalList/pdf" />
+	</target>
+
+	<filelist dir="files" id="reqFiles">
+		<file name="1.txt" />
+		<file name="3.txt" />
+		<file name="pdf/3.ex" />
+	</filelist>
+
+	<target name="copy">
+		<copy todir="finalList">
+			<filelist refid="reqFiles">
+
+			</filelist>
+		</copy>
+	</target>
+</project>
