@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Fileset" basedir="." default="copy">
+	<property file="build.properties" />
+
+	<target name="clean" depends="make">
+		<delete dir="printing" />
+	</target>
+
+	<target name="make">
+		<mkdir dir="printing" />
+	</target>
+
+	<target name="copy" depends="clean">
+		<copy todir="printing">
+			<fileset dir=".">
+				<include name="*.txt" />
+			</fileset>
+			<filterset begintoken="#{" endtoken="}">
+				<filter token="publisheddate" value="${publisheddate}" />
+				<filter token="publisher" value="${publisher}" />
+				<filter token="place" value="${place}" />
+			</filterset>
+		</copy>
+	</target>
+
+</project>
