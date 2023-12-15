@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="jdbcApplication" basedir="." default="init">
+
+	<property file="build.properties" />
+
+	<condition property="jdk11">
+		<equals arg1="${required.jdk.version}" arg2="${ant.java.version}" />
+	</condition>
+
+	<target name="validate" unless="jdk11">
+		<fail message="This build requires JDK ${required.jdk.version} for build." />
+	</target>
+	
+	<path id="externalLibPath">
+		<fileset dir="${ext.lib}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	
+	<tstamp>
+		<format property="buildNo" pattern="d-MM-YYYY.HH.mm.ss"/>
+	</tstamp>
+	
+	<target name="init" depends="validate,clean,createDir,compile,package,run"></target>
+	
+	<target name="clean">
+		<delete dir="${build.classes.dir}" />
+		<delete dir="${build.dist.dir}" />
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="createDir">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.classes.dir}" />
+		<mkdir dir="${build.dist.dir}" />
+	</target>
+
+	<target name="compile">
+		<javac srcdir="${src.dir}" destdir="${build.classes.dir}" classpathref="externalLibPath" />
+		<copy todir="${build.classes.dir}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.properties" />
+			</fileset>
+			<filterset begintoken="#{" endtoken="}">
+				<filter token="driverClassName" value="${driverClassName}" />
+				<filter token="url" value="${url}" />
+				<filter token="user" value="${user}" />
+				<filter token="password" value="${password}" />
+			</filterset>
+		</copy>
+	</target>
+	
+	<target name="package">
+		<jar basedir="${build.classes.dir}" destfile="${build.dist.dir}${file.separator}${ant.project.name}-${buildNo}.jar"></jar>
+	</target>
+	
+	<target name="run">
+		<java classname="com.tsr.test.Test">
+			<classpath>
+				<path refid="externalLibPath"/>
+				<pathelement location="${build.dist.dir}${file.separator}${ant.project.name}-${buildNo}.jar" />
+			</classpath>
+		</java>
+	</target>
+
+</project>
