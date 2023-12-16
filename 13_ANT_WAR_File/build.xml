@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="basicmvc" basedir="." default="init">
+	<property file="build.properties" />
+
+	<path id="libclasspath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<condition property="jdk11">
+		<equals arg1="${java.required.version}" arg2="${ant.java.version}" />
+	</condition>
+	
+	<target name="checkJdkVersion" unless="jdk11">
+		<fail message="jdk 11 is required" />
+	</target>
+
+	<target name="init" depends="checkJdkVersion,clean,createdirs,compile,war" />
+	
+	<target name="clean">
+		<delete dir="${classes.dir}" />
+		<delete dir="${dist.dir}" />
+		<delete dir="${build.dir}" />
+	</target>
+	
+	<target name="createdirs">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${classes.dir}" />
+		<mkdir dir="${dist.dir}" />
+	</target>
+	
+	<target name="compile">
+		<javac includeantruntime="false" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="libclasspath"/>
+	</target>
+	
+	<target name="war">
+		<war destfile="${dist.dir}${file.separator}${ant.project.name}.war" webxml="${webinf.dir}${file.separator}web.xml">
+			<fileset dir="${webcontent.dir}">
+				<include name="**/*.jsp" />
+				<include name="**/*.html" />
+				<include name="**/*.css" />
+				<include name="**/*.js" />
+				<include name="**/*.xml" />
+			</fileset>
+			<lib dir="${lib.dir}">
+				<include name="**/*.jar" />
+			</lib>
+			<classes dir="${classes.dir}">
+				<include name="**/*.class" />
+			</classes>
+		</war>
+	</target>
+	
+</project>
+
+
+
+
+
+
+
+
+
+
+
+
+
