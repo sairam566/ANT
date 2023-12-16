@@ -98,6 +98,9 @@ RemoteSystemsTempFiles/
 hs_err_pid*
 replay_pid*
 
+### Tomcat ###
+/Servers
+
 ### Maven ###
 target/
 pom.xml.tag
